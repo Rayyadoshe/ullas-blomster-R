@@ -1,10 +1,10 @@
 package com.example.ullasblomsterapp.Model;
 
 public enum Occasion {
-    FØDSELSDAG,
-    BRYLLUP,
-    BEGRAVELSE,
-    ROMANTIK,
-    STUDENTERGAVE,
-    MORS_DAG;
+    BIRTHDAY,
+    WEDDING,
+    FUNERAL,
+    ROMANCE,
+    GRADUATION,
+    MOTHERS_DAY
 }

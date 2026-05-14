@@ -25,9 +25,7 @@
 <!-- Hero Section (Sæson/Højtidlighed) -->
 <section class="hero">
     <div class="container hero-grid">
-        <div class="image-placeholder">
-            <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=800" alt="Flot sæsonbuket" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
+        <div class="image-placeholder" id="hero-image-1"></div>
         <div class="content">
             <h1>Sæson/Højtidlighed Fremvisning</h1>
             <p>Oplev vores unikke udvalg af sæsonens smukkeste blomster, nøje udvalgt til at bringe naturens elegance ind i dit hjem.</p>
@@ -42,7 +40,7 @@
 <!-- Section: Byg din egen buket -->
 <section class="build-own">
     <div class="container hero-grid reverse">
-        <div class="image-placeholder"></div>
+        <div class="image-placeholder" id="hero-image-2"></div>
         <div class="content">
             <h2>Byg din egen buket</h2>
             <p>Sammensæt din helt egen personlige hilsen. Vælg mellem vores friske stilke og skab noget helt unikt.</p>
@@ -98,24 +96,58 @@
     </div>
 </footer>
 
-<script src="js/OccasionAPI.js"></script>
+<script src="components/OccasionAPI.js"></script>
 
-<script>
+
+<!-- Fjern de gamle script-tags og indsæt dette -->
+<script type="module">
+    // Ændret fra ./js/ til ./components/
+    import ProductAPI from './components/productApi.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("Forbundet til components/productApi.js!");
+        loadCatalog();
+    });
+
     async function loadCatalog() {
-    const products = await ProductAPI.getAllProducts();
-    const grid = document.getElementById('product-list');
+        try {
+            const products = await ProductAPI.getAllProducts();
+            console.log("Data modtaget:", products);
 
-    // Vi sætter et <img> tag ind i stedet for den tomme div
-    grid.innerHTML = products.map(p => `
-            <div class="product-card">
-                <div class="image-placeholder" style="overflow: hidden; aspect-ratio: 1/1;">
-                    <img src="${p.imageUrl}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h4 style="margin-top: 10px;">${p.name}</h4>
-                <p>${p.price} DKK</p>
-            </div>
-        `).join('');
-}</script>
+            const grid = document.getElementById('product-list');
+            const hero1 = document.getElementById('hero-image-1');
+            const hero2 = document.getElementById('hero-image-2');
+
+            // Udfyld Hero 1
+            if (products.length > 0 && hero1) {
+                hero1.innerHTML = `<img src="${products[0].imageUrl}" crossorigin="anonymous" alt="${products[0].name}" style="width:100%; height:100%; object-fit:cover;">`;
+            }
+
+            // Udfyld Hero 2
+            if (products.length > 1 && hero2) {
+                hero2.innerHTML = `<img src="${products[0].imageUrl}" crossorigin="anonymous" alt="${products[0].name}" style="width:100%; height:100%; object-fit:cover;">`;
+            }
+
+            // Udfyld Kataloget
+            if (grid) {
+                grid.innerHTML = products.map(p => `
+    <div class="product-card">
+        <div class="image-placeholder" style="overflow: hidden; aspect-ratio: 1/1;">
+            <img src="${p.imageUrl}"
+                 crossorigin="anonymous"
+                 alt="${p.name}"
+                 style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <h4 style="margin-top: 10px;">${p.name}</h4>
+        <p>${p.price} DKK</p>
+    </div>
+`).join('');
+            }
+        } catch (error) {
+            console.error("Fejl i loadCatalog:", error);
+        }
+    }
+</script>
 
 </body>
 </html>

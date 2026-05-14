@@ -1,22 +1,28 @@
--- Slet tabeller hvis de findes (god til reset under udvikling)
 DROP TABLE IF EXISTS product;
 
--- Opret Product tabellen
 CREATE TABLE product (
                          id SERIAL PRIMARY KEY,
                          name VARCHAR(255) NOT NULL,
                          description TEXT,
                          price DECIMAL(10, 2) NOT NULL,
                          image_url VARCHAR(500),
-                         product_type VARCHAR(50), -- Matcher jeres Enum (f.eks. 'BOUQUET', 'PLANT')
+                         product_type VARCHAR(50),
                          category VARCHAR(50),
                          occasion VARCHAR(50)
 );
 
--- Indsæt test-data med smukke blomsterbilleder fra Unsplash
 INSERT INTO product (name, description, price, image_url, product_type, category, occasion)
 VALUES
-    ('Rød Elegance', 'En klassisk buket af dybrøde roser.', 299.00, 'https://images.unsplash.com/photo-1548510318-9200382046ff?q=80&w=800', 'BOUQUET', 'FLOWERS', 'ROMANCE'),
-    ('Forårsdrøm', 'Friske tulipaner i blandede farver.', 150.00, 'https://images.unsplash.com/photo-1520302823776-815465c132b7?q=80&w=800', 'BOUQUET', 'FLOWERS', 'BIRTHDAY'),
-    ('Grøn Fred', 'En stor og flot Monstera plante til stuen.', 450.00, 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?q=80&w=800', 'PLANT', 'INTERIOR', 'HOUSEWARMING'),
-    ('Hvid Symfoni', 'Liljer og hvide roser til en særlig anledning.', 350.00, 'https://images.unsplash.com/photo-1525310238806-e197a324b915?q=80&w=800', 'BOUQUET', 'FLOWERS', 'WEDDING');
+    ('Rød Elegance', 'Classic red roses bouquet', 299.00, 'https://images.unsplash.com/photo-1548013146-72479768bbaa?auto=format&fit=crop&w=800&q=80', 'BOUQUET', 'FLOWERS', 'ROMANCE'),
+    ('Hvid Fred', 'Respectful funeral arrangement', 450.00, 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80', 'BOUQUET', 'FLOWERS', 'FUNERAL'),
+    ('Birthday Joy', 'Colorful bouquet for celebrations', 199.50, 'https://images.unsplash.com/photo-1596073413206-fb8997380a0a?auto=format&fit=crop&w=800&q=80', 'BOUQUET', 'FLOWERS', 'BIRTHDAY'),
+    ('Graduation Dream', 'Celebrate the big day', 350.00, 'https://images.unsplash.com/photo-1523694553227-ec114999ef90?auto=format&fit=crop&w=800&q=80', 'BOUQUET', 'FLOWERS', 'GRADUATION'),
+    ('Wedding Bliss', 'White lilies and baby breath', 599.00, 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80', 'BOUQUET', 'FLOWERS', 'WEDDING'),
+    ('For Mom', 'Pink peonies and eucalyptus', 325.00, 'https://images.unsplash.com/photo-1525263139841-f11ae5ad10fe?auto=format&fit=crop&w=800&q=80', 'BOUQUET', 'FLOWERS', 'MOTHERS_DAY');
+
+UPDATE product SET image_url = 'https://picsum.photos/id/152/800/800' WHERE name = 'Rød Elegance';
+UPDATE product SET image_url = 'https://picsum.photos/id/306/800/800' WHERE name = 'Hvid Fred';
+UPDATE product SET image_url = 'https://picsum.photos/id/629/800/800' WHERE name = 'Birthday Joy';
+UPDATE product SET image_url = 'https://picsum.photos/id/429/800/800' WHERE name = 'Graduation Dream';
+UPDATE product SET image_url = 'https://picsum.photos/id/824/800/800' WHERE name = 'Wedding Bliss';
+UPDATE product SET image_url = 'https://picsum.photos/id/106/800/800' WHERE name = 'For Mom';
