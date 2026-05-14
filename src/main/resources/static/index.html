@@ -3,151 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ullas Blomster - Hjem</title>
+    <title>Ullas Blomster - Component Edition</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Google Fonts for Botanical Luxury -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="logo">Ullas Blomster</div>
-    <ul class="nav-links">
-        <li><a href="#">Højtidlighed</a></li>
-        <li><a href="#">Anledninger</a></li>
-        <li><a href="#">Katalog</a></li>
-        <li><a href="#">Kontakt</a></li>
-        <li><a href="#" class="btn-login">Log Ind</a></li>
-    </ul>
-</nav>
+<!-- Her bor hele din applikation -->
+<div id="app"></div>
 
-<!-- Hero Section (Sæson/Højtidlighed) -->
-<section class="hero">
-    <div class="container hero-grid">
-        <div class="image-placeholder" id="hero-image-1"></div>
-        <div class="content">
-            <h1>Sæson/Højtidlighed Fremvisning</h1>
-            <p>Oplev vores unikke udvalg af sæsonens smukkeste blomster, nøje udvalgt til at bringe naturens elegance ind i dit hjem.</p>
-            <div class="btn-group">
-                <button class="btn-primary">Se Udvalg</button>
-                <button class="btn-secondary">Læs Mere</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section: Byg din egen buket -->
-<section class="build-own">
-    <div class="container hero-grid reverse">
-        <div class="image-placeholder" id="hero-image-2"></div>
-        <div class="content">
-            <h2>Byg din egen buket</h2>
-            <p>Sammensæt din helt egen personlige hilsen. Vælg mellem vores friske stilke og skab noget helt unikt.</p>
-            <div class="btn-group">
-                <button class="btn-primary">Start Nu</button>
-                <button class="btn-secondary">Inspiration</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section: Katalog Fremvisning-->
-<section class="catalog">
-    <div class="container">
-        <h2 class="section-title">Katalog Fremvisning</h2>
-        <div class="product-grid" id="product-list">
-            <!-- Data will be loaded here from your ProductController -->
-            <div class="product-card"></div>
-            <div class="product-card"></div>
-            <div class="product-card"></div>
-            <div class="product-card"></div>
-            <div class="product-card"></div>
-            <div class="product-card"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container footer-grid">
-        <div class="footer-info">
-            <div class="logo">Ullas Blomster</div>
-            <p><strong>Adresse:</strong><br>Blomstervænget 123<br>2200 København N, Danmark</p>
-            <div class="socials">
-                <span>IG</span> <span>FB</span> <span>TW</span>
-            </div>
-        </div>
-        <div class="footer-links">
-            <h4>Højtidlighed</h4>
-            <ul><li>Link 1</li><li>Link 2</li></ul>
-        </div>
-        <div class="footer-links">
-            <h4>Anledninger</h4>
-            <ul><li>Link 5</li><li>Link 6</li></ul>
-        </div>
-        <div class="footer-links">
-            <h4>Katalog</h4>
-            <ul><li>Link 9</li><li>Link 10</li></ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 Ullas Blomster. Alle rettigheder forbeholdes.</p>
-    </div>
-</footer>
-
-<script src="components/OccasionAPI.js"></script>
-
-
-<!-- Fjern de gamle script-tags og indsæt dette -->
-<script type="module">
-    // Ændret fra ./js/ til ./components/
-    import ProductAPI from './components/productApi.js';
-
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log("Forbundet til components/productApi.js!");
-        loadCatalog();
-    });
-
-    async function loadCatalog() {
-        try {
-            const products = await ProductAPI.getAllProducts();
-            console.log("Data modtaget:", products);
-
-            const grid = document.getElementById('product-list');
-            const hero1 = document.getElementById('hero-image-1');
-            const hero2 = document.getElementById('hero-image-2');
-
-            // Udfyld Hero 1
-            if (products.length > 0 && hero1) {
-                hero1.innerHTML = `<img src="${products[0].imageUrl}" crossorigin="anonymous" alt="${products[0].name}" style="width:100%; height:100%; object-fit:cover;">`;
-            }
-
-            // Udfyld Hero 2
-            if (products.length > 1 && hero2) {
-                hero2.innerHTML = `<img src="${products[0].imageUrl}" crossorigin="anonymous" alt="${products[0].name}" style="width:100%; height:100%; object-fit:cover;">`;
-            }
-
-            // Udfyld Kataloget
-            if (grid) {
-                grid.innerHTML = products.map(p => `
-    <div class="product-card">
-        <div class="image-placeholder" style="overflow: hidden; aspect-ratio: 1/1;">
-            <img src="${p.imageUrl}"
-                 crossorigin="anonymous"
-                 alt="${p.name}"
-                 style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <h4 style="margin-top: 10px;">${p.name}</h4>
-        <p>${p.price} DKK</p>
-    </div>
-`).join('');
-            }
-        } catch (error) {
-            console.error("Fejl i loadCatalog:", error);
-        }
-    }
-</script>
+<!-- Hovedfilen der samler alle komponenter -->
+<script type="module" src="components/App.js"></script>
 
 </body>
 </html>
