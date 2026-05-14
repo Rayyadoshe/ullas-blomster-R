@@ -1,7 +1,10 @@
 package com.example.ullasblomsterapp.Controller;// denne version bruger repository
 
 import com.example.ullasblomsterapp.Model.Product;
+import com.example.ullasblomsterapp.Model.ProductType;
 import com.example.ullasblomsterapp.Repository.ProductRepository;
+import com.example.ullasblomsterapp.Service.ProductService;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +29,10 @@ public class ProductController {
         repository.save(product);
         return product;
     }
+
 }
+
+
 
 // denne version bruger service
 // jeg kan ikke helt bedømme hvad er bedre så tager dem begge med og i må afgøre

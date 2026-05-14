@@ -1,9 +1,6 @@
 package com.example.ullasblomsterapp.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -17,8 +14,14 @@ public class Product {
     private String description;
     private BigDecimal price;
     private String imageUrl;
+
+    @Enumerated(jakarta.persistence.EnumType.STRING)
     private ProductType productType;
+
+    @Enumerated(jakarta.persistence.EnumType.STRING)
     private Category category;
+
+    @Enumerated(jakarta.persistence.EnumType.STRING)
     private Occasion occasion;
 
     // tom konstruktør
